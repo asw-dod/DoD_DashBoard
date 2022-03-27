@@ -3,7 +3,7 @@
     <v-app-bar app white>
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title>[maybe weather]</v-toolbar-title>
+      <v-toolbar-title>{{ this.weather}}</v-toolbar-title>
     </v-app-bar>
     <v-main>
       <div class="ma-5">
@@ -11,7 +11,7 @@
           <v-col>
             <h2>학사공지</h2>
             <v-card class="card-size">
-              <div v-for="(Bacn,index) in Bachelor" :key="index">
+              <div v-for="(Bacn, index) in Bachelor" :key="index">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -19,7 +19,7 @@
                   {{ Bacn.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                 주최: {{ Bacn.department }} 작성일:{{ Bacn.date }}
+                  주최: {{ Bacn.department }} 작성일:{{ Bacn.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -27,12 +27,12 @@
           <v-col>
             <h2>취업</h2>
             <v-card class="card-size">
-              <div v-for="(inter,interx) in internship" :key="interx">
+              <div v-for="(inter, interx) in internship" :key="interx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{inter[0] + inter[1]}}</v-card-title
+                  {{ inter[0] + inter[1] }}</v-card-title
                 >
               </div>
             </v-card>
@@ -82,7 +82,7 @@
                   {{ non.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                 신청기간: {{ non.receptionTime }} 기간: {{ non.playTime }}
+                  신청기간: {{ non.receptionTime }} 기간: {{ non.playTime }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -188,10 +188,12 @@ export default {
   name: "App",
   components: {},
   data: function () {
+    //처음 데이터 세팅
     return {
       Uptime: "",
       hyomin: "",
       happy: "",
+      weather: "불러오는 중...",
       job_announcement: [],
       Bachelor: [],
       non_discipline: [],
@@ -209,7 +211,7 @@ export default {
     const hyomin_url =
       "https://dorm.deu.ac.kr/hyomin/food/getWeeklyMenu.kmc?locgbn=DE&sch_date=";
 
-    //fun을 적는곳(반복을 위해서 fund을 섰다.)
+    //fun을 적는곳(반복을 위해서 fun을 섰다.)
     //이 fun은 기숙사를 파싱해서 저장하는 함수이다.
     async function getfood(url) {
       const nowdate = dayjs().format("YYYY-MM-DD");
@@ -255,7 +257,6 @@ export default {
     const response = await axios.get(
       "https://api.github.com/repos/asw-dod/dap-macro/issues"
     );
-
     if (response.data[0].title.indexOf("DAP") != -1) {
       const json = JSON.parse(response.data[0].body);
       this.Bachelor = json["학사공지"].notice;
@@ -279,6 +280,7 @@ export default {
     }
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
+    //5시간마다 새로고침을 한다.
     setInterval(async () => {
       this.Uptime = dayjs();
       this.happy = await getfood(happy_url);
@@ -309,7 +311,7 @@ export default {
         this.academic = json1["학과공지"];
         this.school = json1["학교공지"];
       }
-    }, 7200000);
+    }, 18000000);
   },
 };
 </script>
