@@ -328,7 +328,7 @@ export default {
         this.academic = json1["학과공지"];
         this.school = json1["학교공지"];
       }
-    }, 18000000);
+    }, 28800000);
   },
 };
 </script>
