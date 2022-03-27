@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
- 
 import './css/style.css'
 import VAnimateCss from 'v-animate-css';
 
