@@ -3,7 +3,9 @@
     <v-app-bar app white>
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title>{{ this.weather}}</v-toolbar-title>
+      <!-- <v-toolbar-title>
+        부산: {{ this.weather["temp"] }}℃ 날씨:
+        {{ this.weather["info"] }}</v-toolbar-title> -->
     </v-app-bar>
     <v-main>
       <div class="ma-5">
@@ -183,6 +185,7 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
+// import { token } from "./assets/data.json";
 
 export default {
   name: "App",
@@ -248,15 +251,28 @@ export default {
         }
       }
     }
+    // async function weather() {
+    //   const opemwather = await axios(
+    //     "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" + token
+    //   );
+    //   const data = opemwather.data;
+    //   console.log((data.main.temp - 273.15).toFixed(2));
+    //   return {
+    //     temp: (data.main.temp - 273.15).toFixed(2),
+    //     info: data.weather[0].main,
+    //   };
+    // }
 
     //처음에 한번만 이벤트가 발생하는곳
     this.Uptime = dayjs();
+    // this.weather = await weather();
     this.happy = await getfood(happy_url);
     this.hyomin = await getfood(hyomin_url);
 
     const response = await axios.get(
       "https://api.github.com/repos/asw-dod/dap-macro/issues"
     );
+
     if (response.data[0].title.indexOf("DAP") != -1) {
       const json = JSON.parse(response.data[0].body);
       this.Bachelor = json["학사공지"].notice;
@@ -283,6 +299,7 @@ export default {
     //5시간마다 새로고침을 한다.
     setInterval(async () => {
       this.Uptime = dayjs();
+      // this.weather = await weather();
       this.happy = await getfood(happy_url);
       this.hyomin = await getfood(hyomin_url);
 
