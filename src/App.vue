@@ -11,15 +11,15 @@
           <v-col>
             <h2>학사공지</h2>
             <v-card class="card-size">
-              <div v-for="itme in Bachelor" :key="itme">
+              <div v-for="(Bacn,index) in Bachelor" :key="index">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ Bacn.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                 주최: {{ Bacn.department }} 작성일:{{ Bacn.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -27,12 +27,12 @@
           <v-col>
             <h2>취업</h2>
             <v-card class="card-size">
-              <div v-for="itme in internship" :key="itme">
+              <div v-for="(inter,interx) in internship" :key="interx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme[0] + itme[1] }}</v-card-title
+                  {{inter[0] + inter[1]}}</v-card-title
                 >
               </div>
             </v-card>
@@ -40,15 +40,15 @@
           <v-col>
             <h2>ASW공지</h2>
             <v-card class="card-size">
-              <div v-for="itme in Entrepreneurship" :key="itme">
+              <div v-for="(Enter, Enterx) in Entrepreneurship" :key="Enterx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ Enter.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                  {{ Enter.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -56,15 +56,15 @@
           <v-col>
             <h2>학과공지</h2>
             <v-card class="card-size">
-              <div v-for="itme in academic" :key="itme">
+              <div v-for="(aca, acax) in academic" :key="acax">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ aca.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                  {{ aca.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -74,15 +74,15 @@
           <v-col>
             <h2>비교과</h2>
             <v-card class="card-size">
-              <div v-for="itme in non_discipline" :key="itme">
+              <div v-for="(non, nonx) in non_discipline" :key="nonx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ non.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                 신청기간: {{ non.receptionTime }} 기간: {{ non.playTime }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -90,15 +90,15 @@
           <v-col>
             <h2>취업공지</h2>
             <v-card class="card-size">
-              <div v-for="itme in job_announcement" :key="itme">
+              <div v-for="(job, jobx) in job_announcement" :key="jobx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ job.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                  {{ job.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -106,15 +106,15 @@
           <v-col>
             <h2>학교공지</h2>
             <v-card class="card-size">
-              <div v-for="itme in school" :key="itme">
+              <div v-for="(sch, shcx) in school" :key="shcx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
                 >
-                  {{ itme.title }}</v-card-title
+                  {{ sch.title }}</v-card-title
                 >
                 <v-card-subtitle v-animate-css="'flipInX'" class="pb-0">
-                  {{ itme.date }}
+                  {{ sch.date }}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -309,7 +309,7 @@ export default {
         this.academic = json1["학과공지"];
         this.school = json1["학교공지"];
       }
-    }, 60000);
+    }, 7200000);
   },
 };
 </script>
