@@ -3,15 +3,15 @@
     <v-app-bar app white>
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- <v-toolbar-title>
+      <v-toolbar-title>
         부산: {{ this.weather["temp"] }}℃ 날씨:
-        {{ this.weather["info"] }}</v-toolbar-title> -->
+        {{ this.weather["info"] }}</v-toolbar-title>
     </v-app-bar>
     <v-main>
       <div class="ma-5">
         <v-row>
-          <v-col>
-            <h2>학사공지</h2>
+          <v-col >
+            <h2 class="test" >학사공지</h2>
             <v-card class="card-size">
               <div v-for="(Bacn, index) in Bachelor" :key="index">
                 <v-card-title
@@ -133,10 +133,6 @@
               <v-carousel-item>
                 <!-- <v-sheet height="100%" color="blue lighten-5"> -->
                 <h2>행복기숙사</h2>
-                <h2>아침</h2>
-                <p class="memu-size">
-                  {{ this.happy["아침"] }}
-                </p>
                 <h2>점심</h2>
                 <p class="memu-size">
                   [한식]{{ this.happy["점심"] }}<br />[일품]{{
@@ -185,7 +181,6 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
-// import { token } from "./assets/data.json";
 
 export default {
   name: "App",
@@ -251,21 +246,21 @@ export default {
         }
       }
     }
-    // async function weather() {
-    //   const opemwather = await axios(
-    //     "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" + token
-    //   );
-    //   const data = opemwather.data;
-    //   console.log((data.main.temp - 273.15).toFixed(2));
-    //   return {
-    //     temp: (data.main.temp - 273.15).toFixed(2),
-    //     info: data.weather[0].main,
-    //   };
-    // }
+    async function weather() {
+      const opemwather = await axios(
+        "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" + process.env.VUE_APP_token
+      );
+      const data = opemwather.data;
+      console.log((data.main.temp - 273.15).toFixed(2));
+      return {
+        temp: (data.main.temp - 273.15).toFixed(2),
+        info: data.weather[0].main,
+      };
+    }
 
     //처음에 한번만 이벤트가 발생하는곳
     this.Uptime = dayjs();
-    // this.weather = await weather();
+    this.weather = await weather();
     this.happy = await getfood(happy_url);
     this.hyomin = await getfood(hyomin_url);
 
@@ -299,7 +294,7 @@ export default {
     //5시간마다 새로고침을 한다.
     setInterval(async () => {
       this.Uptime = dayjs();
-      // this.weather = await weather();
+      this.weather = await weather();
       this.happy = await getfood(happy_url);
       this.hyomin = await getfood(hyomin_url);
 
