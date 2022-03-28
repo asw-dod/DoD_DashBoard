@@ -21,8 +21,15 @@ body {
   font-weight: bold;
 }
 
-.test {
-  background-color:#8FBDD3;
-  border-radius: '5px';
+.list_card_top {
+  border-radius: 10px 10px 0px 0px;
   text-align: center;
+}
+
+.s_card {
+  border-radius: 10px;
+}
+
+.h_card {
+  border-radius: 5px;
 }

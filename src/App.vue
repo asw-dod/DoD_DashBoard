@@ -1,17 +1,17 @@
 <template>
   <v-app class="mmain">
-    <v-app-bar app white>
+    <v-app-bar app :style="{'background-color': '#79A3B1'}">
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title>
         부산: {{ this.weather["temp"] }}℃ 날씨:
         {{ this.weather["info"] }}</v-toolbar-title>
     </v-app-bar>
-    <v-main>
+    <v-main :style="{'background-color': '#DFDFDE'}">
       <div class="ma-5">
         <v-row>
           <v-col >
-            <h2 class="test" >학사공지</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📟학사공지</h2>
             <v-card class="card-size">
               <div v-for="(Bacn, index) in Bachelor" :key="index">
                 <v-card-title
@@ -27,7 +27,7 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2>취업</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">💻취업</h2>
             <v-card class="card-size">
               <div v-for="(inter, interx) in internship" :key="interx">
                 <v-card-title
@@ -40,7 +40,7 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2>ASW공지</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📃창업교육센터</h2>
             <v-card class="card-size">
               <div v-for="(Enter, Enterx) in Entrepreneurship" :key="Enterx">
                 <v-card-title
@@ -56,7 +56,7 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2>학과공지</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📰학과공지</h2>
             <v-card class="card-size">
               <div v-for="(aca, acax) in academic" :key="acax">
                 <v-card-title
@@ -74,7 +74,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <h2>비교과</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">🕹️비교과</h2>
             <v-card class="card-size">
               <div v-for="(non, nonx) in non_discipline" :key="nonx">
                 <v-card-title
@@ -90,7 +90,7 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2>취업공지</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">💻취업공지</h2>
             <v-card class="card-size">
               <div v-for="(job, jobx) in job_announcement" :key="jobx">
                 <v-card-title
@@ -106,7 +106,7 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2>학교공지</h2>
+            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📭학교공지</h2>
             <v-card class="card-size">
               <div v-for="(sch, shcx) in school" :key="shcx">
                 <v-card-title
@@ -121,35 +121,37 @@
               </div>
             </v-card>
           </v-col>
-          <v-col>
-            <h2>오늘 기숙사 식단공지</h2>
+          <v-col class='s_card' :style="{'background-color': '#79A3B1'}">
+            <h2>📌오늘 기숙사 식단공지</h2>
             <v-carousel
               cycle
               height="400"
               :show-arrows="false"
               hide-delimiter-background
               delimiter-icon="mdi-minus"
+              class="h_card"
+              :style="{'background-color': '#DFDFDE'}"
             >
               <v-carousel-item>
-                <!-- <v-sheet height="100%" color="blue lighten-5"> -->
-                <h2>행복기숙사</h2>
-                <h2>점심</h2>
-                <p class="memu-size">
-                  [한식]{{ this.happy["점심"] }}<br />[일품]{{
-                    this.happy["점심특"]
-                  }}
-                </p>
-                <h2>저녁</h2>
-                <p class="memu-size">
-                  [한식]{{ this.happy["저녁"] }}<br />[일품]{{
-                    this.happy["저녁특"]
-                  }}
-                </p>
-                <!-- </v-sheet> -->
-              </v-carousel-item>
-              <v-carousel-item>
-                <h2>효민기숙사</h2>
                 <v-col>
+                  <h2>행복기숙사</h2>
+                  <h2>점심</h2>
+                  <p class="memu-size">
+                    [한식] {{ this.happy["점심"] }}<br />[일품]{{
+                      this.happy["점심특"]
+                    }}
+                  </p>
+                  <h2>저녁</h2>
+                  <p class="memu-size">
+                    [한식] {{ this.happy["저녁"] }}<br />[일품]{{
+                      this.happy["저녁특"]
+                    }}
+                  </p>
+                </v-col>
+              </v-carousel-item>
+              <v-carousel-item >
+                <v-col>
+                  <h2>효민기숙사</h2>
                   <h2>아침</h2>
                   <p class="memu-size">
                     {{ this.hyomin["아침"] }}
@@ -169,7 +171,7 @@
         </v-row>
       </div>
     </v-main>
-    <v-footer app>
+    <v-footer app :style="{'background-color': '#456268'}">
       Made by INMD
       <v-spacer></v-spacer>
       Update: {{ this.Uptime }}
@@ -257,10 +259,10 @@ export default {
         info: data.weather[0].main,
       };
     }
-
+  console.log(process.env);
     //처음에 한번만 이벤트가 발생하는곳
-    this.Uptime = dayjs();
-    this.weather = await weather();
+    this.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
+    //this.weather = await weather();
     this.happy = await getfood(happy_url);
     this.hyomin = await getfood(hyomin_url);
 
@@ -291,7 +293,7 @@ export default {
     }
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
-    //5시간마다 새로고침을 한다.
+    //8시간마다 새로고침을 한다.
     setInterval(async () => {
       this.Uptime = dayjs();
       this.weather = await weather();
