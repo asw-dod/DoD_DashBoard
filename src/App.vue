@@ -1,20 +1,23 @@
 <template>
-  <v-app class="mmain">
-    <v-app-bar app :style="{ 'background-color': '#79A3B1' }">
+  <v-app class="mmain t">
+    <v-app-bar app :style="{ 'background-color': '#A1CAE2' }">
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title>
         부산: {{ this.input.weather["temp"] }}℃ 날씨:
-        {{ this.input.weather["info"] }}</v-toolbar-title
+        {{ this.input.weather["info"] }}
+        <span :style="{ 'font-size': '30px' }">{{
+          this.input.weather["icon"]
+        }}</span></v-toolbar-title
       >
     </v-app-bar>
-    <v-main :style="{ 'background-color': '#DFDFDE' }" :key="componentKey">
+    <v-main :style="{ 'background-color': '#B1D0E0' }" :key="componentKey">
       <div class="ma-5">
         <v-row>
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#FDAF75' }"
             >
               📟학사공지
             </h2>
@@ -35,7 +38,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#24A19C' }"
             >
               💻취업
             </h2>
@@ -53,7 +56,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#A2D2FF' }"
             >
               📃창업교육센터
             </h2>
@@ -77,7 +80,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#EDD2F3' }"
             >
               📰학과공지
             </h2>
@@ -96,11 +99,11 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row >
+        <v-row>
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#BAABDA' }"
             >
               🕹️비교과
             </h2>
@@ -121,7 +124,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#EBD671' }"
             >
               💻취업공지
             </h2>
@@ -142,7 +145,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#79A3B1' }"
+              :style="{ 'background-color': '#3D84B8' }"
             >
               📭학교공지
             </h2>
@@ -160,7 +163,7 @@
               </div>
             </v-card>
           </v-col>
-          <v-col class="s_card" :style="{ 'background-color': '#79A3B1' }">
+          <v-col class="s_card" :style="{ 'background-color': '#95D1CC' }">
             <h2>📌오늘 기숙사 식단공지</h2>
             <v-carousel
               cycle
@@ -169,7 +172,7 @@
               hide-delimiter-background
               delimiter-icon="mdi-minus"
               class="h_card"
-              :style="{ 'background-color': '#DFDFDE' }"
+              :style="{ 'background-color': '#F6F2D4' }"
             >
               <v-carousel-item>
                 <v-col>
@@ -210,7 +213,7 @@
         </v-row>
       </div>
     </v-main>
-    <v-footer app :style="{ 'background-color': '#D1D1D1' }">
+    <v-footer app :style="{ 'background-color': '#B6C9F0' }">
       Made by INMD
       <v-spacer></v-spacer>
       Update: {{ this.input.Uptime }}
@@ -242,7 +245,7 @@ export default {
         academic: [],
         school: [],
       },
-      //이 값은 Fake이기 때문에 따로 
+      //이 값은 Fake이기 때문에 따로
       //신경쓸 필요가 없다.
       //키값 0~3까지 쓴다.
       componentKey: 0,
@@ -258,10 +261,12 @@ export default {
 
     //fun을 적는곳(반복을 위해서 fun을 섰다.)
     //이 fun은 기숙사를 파싱해서 저장하는 함수이다.
-    async function getfood(url) {
+    async function getfood(url_a) {
       const nowdate = dayjs().format("YYYY-MM-DD");
-      const responce = await axios(url + nowdate);
-      if (url.indexOf("hyomin") != -1) {
+      const responce = await axios({
+        url: url_a + nowdate,
+      });
+      if (url_a.indexOf("hyomin") != -1) {
         const data = responce.data["root"][0].WEEKLYMENU[0];
         for (let index = 0; index < 8; index++) {
           if (data["fo_date" + index] == nowdate) {
@@ -300,10 +305,34 @@ export default {
           process.env.VUE_APP_token
       );
       const data = opemwather.data;
-      console.log((data.main.temp - 273.15).toFixed(2));
+      const image = data.weather[0].icon;
+      console.log(data.weather[0].icon);
+      let icon = "";
+
+      if (image == "01d" || image == "01n") {
+        icon = "🌕";
+      } else if (image == "02d" || image == "02n") {
+        icon = "⛅";
+      } else if (image == "03d" || image == "03n") {
+        icon = "🌫️";
+      } else if (image == "04d" || image == "04n") {
+        icon = "☁";
+      } else if (image == "09d" || image == "09n") {
+        icon = "🌧";
+      } else if (image == "10d" || image == "10n") {
+        icon = "🌦";
+      } else if (image == "11d" || image == "11n") {
+        icon = "🌩";
+      } else if (image == "13d" || image == "13n") {
+        icon = "❄";
+      } else if (image == "50d" || image == "50n") {
+        icon = "🌫️";
+      }
+
       return {
         temp: (data.main.temp - 273.15).toFixed(2),
         info: data.weather[0].main,
+        icon: icon,
       };
     }
 
@@ -313,9 +342,11 @@ export default {
     this.input.happy = await getfood(happy_url);
     this.input.hyomin = await getfood(hyomin_url);
 
-    const response = await axios.get("https://api.github.com/repos/asw-dod/dap-macro/issues");
+    const response = await axios.get(
+      "https://api.github.com/repos/asw-dod/dap-macro/issues"
+    );
 
-    if (response.data[0].title.indexOf("DAP") != -1){
+    if (response.data[0].title.indexOf("DAP") != -1) {
       const json = JSON.parse(response.data[0].body);
       this.input.Bachelor = json["학사공지"].notice;
       this.input.job_announcement = json["취업공지"].notice;
@@ -340,38 +371,15 @@ export default {
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     //8시간마다 새로고침을 한다.
     setInterval(async () => {
-      this.input.Uptime = dayjs();
-      this.input.weather = await weather();
-      this.input.happy = await getfood(happy_url);
-      this.input.hyomin = await getfood(hyomin_url);
-
-      const response = await axios.get(
-        "https://api.github.com/repos/asw-dod/dap-macro/issues"
-      );
-
-      if (response.data[0].title.indexOf("DAP") != -1) {
-        const json = JSON.parse(response.data[0].body);
-        this.input.Bachelor = json["학사공지"].notice;
-        this.input.job_announcement = json["취업공지"].notice;
-        this.input.non_discipline = json["비교과"].notice;
-        this.input.internship = json["인턴십"].notice;
-        const json1 = JSON.parse(response.data[1].body);
-        this.input.Entrepreneurship = json1["창업교육센터"];
-        this.input.academic = json1["학과공지"];
-        this.input.school = json1["학교공지"];
-      } else {
-        const json = JSON.parse(response.data[1].body);
-        this.input.Bachelor = json["학사공지"].notice;
-        this.input.job_announcement = json["취업공지"].notice;
-        this.input.non_discipline = json["비교과"].notice;
-        this.input.internship = json["인턴십"].notice;
-        const json1 = JSON.parse(response.data[0].body);
-        this.input.Entrepreneurship = json1["창업교육센터"];
-        this.input.academic = json1["학과공지"];
-        this.input.school = json1["학교공지"];
-      }
-      this.componentKey = 2;
+      //서버단에서 변경사항이 없는지 업데이트를한다.
+      //만약에 변경사항이 없으면 그냥뭐 api에서
+      location.reload();
     }, 28800000);
+
+    //1시간마다 날씨정보를 새로고침한다.
+    setInterval(async () => {
+      this.input.weather = await weather();
+    }, 3600000);
 
     //10분마다 새로고침을 한다. (Fake)
     setInterval(async () => {
@@ -382,7 +390,7 @@ export default {
       } else {
         this.componentKey = 1;
       }
-    }, 20000);
+    }, 6000);
   },
 };
 </script>

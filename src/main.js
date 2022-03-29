@@ -3,11 +3,12 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import './css/style.css'
 import VAnimateCss from 'v-animate-css';
-
+import VueRouter from 'vue-router'
 
 Vue.config.productionTip = false
 
-Vue.use(VAnimateCss);
+Vue.use(VueRouter)
+Vue.use( VAnimateCss)
 
 new Vue({
   vuetify,
