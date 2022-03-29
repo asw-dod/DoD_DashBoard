@@ -1,19 +1,25 @@
 <template>
   <v-app class="mmain">
-    <v-app-bar app :style="{'background-color': '#79A3B1'}">
+    <v-app-bar app :style="{ 'background-color': '#79A3B1' }">
       <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title>
-        부산: {{ this.weather["temp"] }}℃ 날씨:
-        {{ this.weather["info"] }}</v-toolbar-title>
+        부산: {{ this.input.weather["temp"] }}℃ 날씨:
+        {{ this.input.weather["info"] }}</v-toolbar-title
+      >
     </v-app-bar>
-    <v-main :style="{'background-color': '#DFDFDE'}">
+    <v-main :style="{ 'background-color': '#DFDFDE' }" :key="componentKey">
       <div class="ma-5">
         <v-row>
-          <v-col >
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📟학사공지</h2>
+          <v-col>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              📟학사공지
+            </h2>
             <v-card class="card-size">
-              <div v-for="(Bacn, index) in Bachelor" :key="index">
+              <div v-for="(Bacn, index) in input.Bachelor" :key="index">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -27,9 +33,14 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">💻취업</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              💻취업
+            </h2>
             <v-card class="card-size">
-              <div v-for="(inter, interx) in internship" :key="interx">
+              <div v-for="(inter, interx) in input.internship" :key="interx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -40,9 +51,17 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📃창업교육센터</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              📃창업교육센터
+            </h2>
             <v-card class="card-size">
-              <div v-for="(Enter, Enterx) in Entrepreneurship" :key="Enterx">
+              <div
+                v-for="(Enter, Enterx) in input.Entrepreneurship"
+                :key="Enterx"
+              >
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -56,9 +75,14 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📰학과공지</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              📰학과공지
+            </h2>
             <v-card class="card-size">
-              <div v-for="(aca, acax) in academic" :key="acax">
+              <div v-for="(aca, acax) in input.academic" :key="acax">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -72,11 +96,16 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row >
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">🕹️비교과</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              🕹️비교과
+            </h2>
             <v-card class="card-size">
-              <div v-for="(non, nonx) in non_discipline" :key="nonx">
+              <div v-for="(non, nonx) in input.non_discipline" :key="nonx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -90,9 +119,14 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">💻취업공지</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              💻취업공지
+            </h2>
             <v-card class="card-size">
-              <div v-for="(job, jobx) in job_announcement" :key="jobx">
+              <div v-for="(job, jobx) in input.job_announcement" :key="jobx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -106,9 +140,14 @@
             </v-card>
           </v-col>
           <v-col>
-            <h2 class="list_card_top" :style="{'background-color': '#79A3B1'}">📭학교공지</h2>
+            <h2
+              class="list_card_top"
+              :style="{ 'background-color': '#79A3B1' }"
+            >
+              📭학교공지
+            </h2>
             <v-card class="card-size">
-              <div v-for="(sch, shcx) in school" :key="shcx">
+              <div v-for="(sch, shcx) in input.school" :key="shcx">
                 <v-card-title
                   v-animate-css="'flipInX'"
                   class="font-weight-bold"
@@ -121,7 +160,7 @@
               </div>
             </v-card>
           </v-col>
-          <v-col class='s_card' :style="{'background-color': '#79A3B1'}">
+          <v-col class="s_card" :style="{ 'background-color': '#79A3B1' }">
             <h2>📌오늘 기숙사 식단공지</h2>
             <v-carousel
               cycle
@@ -130,39 +169,39 @@
               hide-delimiter-background
               delimiter-icon="mdi-minus"
               class="h_card"
-              :style="{'background-color': '#DFDFDE'}"
+              :style="{ 'background-color': '#DFDFDE' }"
             >
               <v-carousel-item>
                 <v-col>
                   <h2>행복기숙사</h2>
                   <h2>점심</h2>
                   <p class="memu-size">
-                    [한식] {{ this.happy["점심"] }}<br />[일품]{{
-                      this.happy["점심특"]
+                    [한식] {{ this.input.happy["점심"] }}<br />[일품]{{
+                      this.input.happy["점심특"]
                     }}
                   </p>
                   <h2>저녁</h2>
                   <p class="memu-size">
-                    [한식] {{ this.happy["저녁"] }}<br />[일품]{{
-                      this.happy["저녁특"]
+                    [한식] {{ this.input.happy["저녁"] }}<br />[일품]{{
+                      this.input.happy["저녁특"]
                     }}
                   </p>
                 </v-col>
               </v-carousel-item>
-              <v-carousel-item >
+              <v-carousel-item>
                 <v-col>
                   <h2>효민기숙사</h2>
                   <h2>아침</h2>
                   <p class="memu-size">
-                    {{ this.hyomin["아침"] }}
+                    {{ this.input.hyomin["아침"] }}
                   </p>
                   <h2>점심</h2>
                   <p class="memu-size">
-                    {{ this.hyomin["점심"] }}
+                    {{ this.input.hyomin["점심"] }}
                   </p>
                   <h2>저녁</h2>
                   <p class="memu-size">
-                    {{ this.hyomin["저녁"] }}
+                    {{ this.input.hyomin["저녁"] }}
                   </p>
                 </v-col>
               </v-carousel-item>
@@ -171,10 +210,10 @@
         </v-row>
       </div>
     </v-main>
-    <v-footer app :style="{'background-color': '#456268'}">
+    <v-footer app :style="{ 'background-color': '#D1D1D1' }">
       Made by INMD
       <v-spacer></v-spacer>
-      Update: {{ this.Uptime }}
+      Update: {{ this.input.Uptime }}
     </v-footer>
     n>
   </v-app>
@@ -190,17 +229,23 @@ export default {
   data: function () {
     //처음 데이터 세팅
     return {
-      Uptime: "",
-      hyomin: "",
-      happy: "",
-      weather: "불러오는 중...",
-      job_announcement: [],
-      Bachelor: [],
-      non_discipline: [],
-      internship: [],
-      Entrepreneurship: [],
-      academic: [],
-      school: [],
+      input: {
+        Uptime: "",
+        hyomin: "",
+        happy: "",
+        weather: "불러오는 중...",
+        job_announcement: [],
+        Bachelor: [],
+        non_discipline: [],
+        internship: [],
+        Entrepreneurship: [],
+        academic: [],
+        school: [],
+      },
+      //이 값은 Fake이기 때문에 따로 
+      //신경쓸 필요가 없다.
+      //키값 0~3까지 쓴다.
+      componentKey: 0,
     };
   },
   method: {},
@@ -248,9 +293,11 @@ export default {
         }
       }
     }
+
     async function weather() {
       const opemwather = await axios(
-        "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" + process.env.VUE_APP_token
+        "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" +
+          process.env.VUE_APP_token
       );
       const data = opemwather.data;
       console.log((data.main.temp - 273.15).toFixed(2));
@@ -259,46 +306,44 @@ export default {
         info: data.weather[0].main,
       };
     }
-  console.log(process.env);
+
     //처음에 한번만 이벤트가 발생하는곳
-    this.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
-    //this.weather = await weather();
-    this.happy = await getfood(happy_url);
-    this.hyomin = await getfood(hyomin_url);
+    this.input.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
+    this.input.weather = await weather();
+    this.input.happy = await getfood(happy_url);
+    this.input.hyomin = await getfood(hyomin_url);
 
-    const response = await axios.get(
-      "https://api.github.com/repos/asw-dod/dap-macro/issues"
-    );
+    const response = await axios.get("https://api.github.com/repos/asw-dod/dap-macro/issues");
 
-    if (response.data[0].title.indexOf("DAP") != -1) {
+    if (response.data[0].title.indexOf("DAP") != -1){
       const json = JSON.parse(response.data[0].body);
-      this.Bachelor = json["학사공지"].notice;
-      this.job_announcement = json["취업공지"].notice;
-      this.non_discipline = json["비교과"].notice;
-      this.internship = json["인턴십"].notice;
+      this.input.Bachelor = json["학사공지"].notice;
+      this.input.job_announcement = json["취업공지"].notice;
+      this.input.non_discipline = json["비교과"].notice;
+      this.input.internship = json["인턴십"].notice;
       const json1 = JSON.parse(response.data[1].body);
-      this.Entrepreneurship = json1["창업교육센터"];
-      this.academic = json1["학과공지"];
-      this.school = json1["학교공지"];
+      this.input.Entrepreneurship = json1["창업교육센터"];
+      this.input.academic = json1["학과공지"];
+      this.input.school = json1["학교공지"];
     } else {
       const json = JSON.parse(response.data[1].body);
-      this.Bachelor = json["학사공지"].notice;
-      this.job_announcement = json["취업공지"].notice;
-      this.non_discipline = json["비교과"].notice;
-      this.internship = json["인턴십"].notice;
+      this.input.Bachelor = json["학사공지"].notice;
+      this.input.job_announcement = json["취업공지"].notice;
+      this.input.non_discipline = json["비교과"].notice;
+      this.input.internship = json["인턴십"].notice;
       const json1 = JSON.parse(response.data[0].body);
-      this.Entrepreneurship = json1["창업교육센터"];
-      this.academic = json1["학과공지"];
-      this.school = json1["학교공지"];
+      this.input.Entrepreneurship = json1["창업교육센터"];
+      this.input.academic = json1["학과공지"];
+      this.input.school = json1["학교공지"];
     }
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     //8시간마다 새로고침을 한다.
     setInterval(async () => {
-      this.Uptime = dayjs();
-      this.weather = await weather();
-      this.happy = await getfood(happy_url);
-      this.hyomin = await getfood(hyomin_url);
+      this.input.Uptime = dayjs();
+      this.input.weather = await weather();
+      this.input.happy = await getfood(happy_url);
+      this.input.hyomin = await getfood(hyomin_url);
 
       const response = await axios.get(
         "https://api.github.com/repos/asw-dod/dap-macro/issues"
@@ -306,26 +351,38 @@ export default {
 
       if (response.data[0].title.indexOf("DAP") != -1) {
         const json = JSON.parse(response.data[0].body);
-        this.Bachelor = json["학사공지"].notice;
-        this.job_announcement = json["취업공지"].notice;
-        this.non_discipline = json["비교과"].notice;
-        this.internship = json["인턴십"].notice;
+        this.input.Bachelor = json["학사공지"].notice;
+        this.input.job_announcement = json["취업공지"].notice;
+        this.input.non_discipline = json["비교과"].notice;
+        this.input.internship = json["인턴십"].notice;
         const json1 = JSON.parse(response.data[1].body);
-        this.Entrepreneurship = json1["창업교육센터"];
-        this.academic = json1["학과공지"];
-        this.school = json1["학교공지"];
+        this.input.Entrepreneurship = json1["창업교육센터"];
+        this.input.academic = json1["학과공지"];
+        this.input.school = json1["학교공지"];
       } else {
         const json = JSON.parse(response.data[1].body);
-        this.Bachelor = json["학사공지"].notice;
-        this.job_announcement = json["취업공지"].notice;
-        this.non_discipline = json["비교과"].notice;
-        this.internship = json["인턴십"].notice;
+        this.input.Bachelor = json["학사공지"].notice;
+        this.input.job_announcement = json["취업공지"].notice;
+        this.input.non_discipline = json["비교과"].notice;
+        this.input.internship = json["인턴십"].notice;
         const json1 = JSON.parse(response.data[0].body);
-        this.Entrepreneurship = json1["창업교육센터"];
-        this.academic = json1["학과공지"];
-        this.school = json1["학교공지"];
+        this.input.Entrepreneurship = json1["창업교육센터"];
+        this.input.academic = json1["학과공지"];
+        this.input.school = json1["학교공지"];
       }
+      this.componentKey = 2;
     }, 28800000);
+
+    //10분마다 새로고침을 한다. (Fake)
+    setInterval(async () => {
+      //componentKey키는 0에서 1로 왔다갔다
+      //키값만 바꾸어서 재렌딩을 시킨다.
+      if (this.componentKey == 0) {
+        this.componentKey = 0;
+      } else {
+        this.componentKey = 1;
+      }
+    }, 20000);
   },
 };
 </script>
