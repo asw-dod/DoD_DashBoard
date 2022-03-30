@@ -14,8 +14,17 @@
  }
  
 .card-size {
-   height: 38vh;
+   height: 39.2vh;
    overflow: scroll;
+}
+
+.f-card-size {
+  height: 29vh;
+}
+
+.t-card-size {
+  height: 84vh;
+  overflow: scroll;
 }
 
 .memu-size {
