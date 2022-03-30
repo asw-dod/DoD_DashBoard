@@ -56,7 +56,7 @@
           <v-col>
             <h2
               class="list_card_top"
-              :style="{ 'background-color': '#A2D2FF' }"
+              :style="{ 'background-color': '#548CFF' }"
             >
               📃창업교육센터
             </h2>
@@ -164,7 +164,7 @@
             </v-card>
           </v-col>
           <v-col class="s_card" :style="{ 'background-color': '#95D1CC' }">
-            <h2>📌오늘 기숙사 식단공지</h2>
+            <h2>📌오늘 기숙사 식단, 학식공지</h2>
             <v-carousel
               cycle
               height="400"
@@ -244,6 +244,8 @@ export default {
         Entrepreneurship: [],
         academic: [],
         school: [],
+        inforamtion: [],
+        suduck: []
       },
       //이 값은 Fake이기 때문에 따로
       //신경쓸 필요가 없다.
@@ -254,49 +256,13 @@ export default {
   method: {},
   async mounted() {
     //변수를 적는 곳
-    const happy_url =
-      "https://dorm.deu.ac.kr/deu/food/getWeeklyMenu.kmc?locgbn=DE&sch_date=";
-    const hyomin_url =
-      "https://dorm.deu.ac.kr/hyomin/food/getWeeklyMenu.kmc?locgbn=DE&sch_date=";
 
     //fun을 적는곳(반복을 위해서 fun을 섰다.)
     //이 fun은 기숙사를 파싱해서 저장하는 함수이다.
-    async function getfood(url_a) {
-      const nowdate = dayjs().format("YYYY-MM-DD");
-      const responce = await axios({
-        url: url_a + nowdate,
-      });
-      if (url_a.indexOf("hyomin") != -1) {
-        const data = responce.data["root"][0].WEEKLYMENU[0];
-        for (let index = 0; index < 8; index++) {
-          if (data["fo_date" + index] == nowdate) {
-            return {
-              아침: data["fo_menu_mor" + index],
-              점심: data["fo_menu_lun" + index],
-              저녁: data["fo_menu_eve" + index],
-            };
-          }
-        }
-      } else {
-        for (let main_index = 0; main_index < 2; main_index++) {
-          const data = responce.data["root"][0].WEEKLYMENU[main_index];
-          for (
-            let index = 4 * main_index;
-            index < 4 + 4 * main_index;
-            index++
-          ) {
-            if (data["fo_date" + index] == nowdate) {
-              return {
-                아침: data["fo_menu_mor" + index],
-                점심: data["fo_menu_lun" + index],
-                점심특: data["fo_sub_lun" + index],
-                저녁: data["fo_menu_eve" + index],
-                저녁특: data["fo_sub_eve" + index],
-              };
-            }
-          }
-        }
-      }
+    async function getfood(info) {
+      const responce = await axios("https://raw.githubusercontent.com/asw-dod/Deu_food_api/master/output/api.json");
+      const data = responce.data
+
     }
 
     async function weather() {
@@ -339,8 +305,10 @@ export default {
     //처음에 한번만 이벤트가 발생하는곳
     this.input.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
     this.input.weather = await weather();
-    this.input.happy = await getfood(happy_url);
-    this.input.hyomin = await getfood(hyomin_url);
+    // this.input.happy = await getfood();
+    // this.input.hyomin = await getfood();
+    // this.input.inforamtion = await getfood();
+    // this.input.suduck = await getfood();
 
     const response = await axios.get(
       "https://api.github.com/repos/asw-dod/dap-macro/issues"
