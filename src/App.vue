@@ -259,7 +259,7 @@
       </div>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
-      Made by INMD
+      Made by INMD(V 0.0.6)
       <v-spacer></v-spacer>
       Update: {{ this.input.Uptime }}
     </v-footer>
