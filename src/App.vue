@@ -1,9 +1,9 @@
 <template>
   <v-app class="mmain t">
     <v-app-bar app :style="{ 'background-color': '#A1CAE2' }">
-      <v-toolbar-title>ASW D.o.D Dap Dashboard</v-toolbar-title>
+      <v-toolbar-title :style="{'font-weight':'Bold'}">ASW D.o.D Dap Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title>
+      <v-toolbar-title :style="{'font-weight':'Bold'}">
         부산: {{ this.input.weather["temp"] }}℃ 날씨:
         {{ this.input.weather["info"] }}
         <span :style="{ 'font-size': '30px' }">{{
@@ -259,7 +259,7 @@
       </div>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
-      Made by INMD(V 0.0.6)
+      Made by INMD1
       <v-spacer></v-spacer>
       Update: {{ this.input.Uptime }}
     </v-footer>
