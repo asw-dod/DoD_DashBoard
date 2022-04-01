@@ -1,18 +1,24 @@
 <template>
   <v-app class="mmain t">
     <v-app-bar app :style="{ 'background-color': '#A1CAE2' }">
-      <v-toolbar-title :style="{'font-weight':'Bold'}">ASW D.o.D Dap Dashboard</v-toolbar-title>
+      <v-toolbar-title :style="{ 'font-weight': 'Bold' }">
+        ASW D.o.D Dap Dashboard</v-toolbar-title
+      >
       <v-spacer></v-spacer>
-      <v-toolbar-title :style="{'font-weight':'Bold'}">
+      <v-toolbar-title :style="{ 'font-weight': 'Bold', 'font-size': '40px' }">
+        {{ this.time }}
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-title v-if="this.input.weather != undefined" :style="{ 'font-weight': 'Bold' }">
         부산: {{ this.input.weather["temp"] }}℃ 날씨:
         {{ this.input.weather["info"] }}
         <span :style="{ 'font-size': '30px' }">{{
           this.input.weather["icon"]
-        }}</span></v-toolbar-title
-      >
+        }}</span></v-toolbar-title>
+        <v-toolbar-title v-else :style="{ 'font-weight': 'Bold' }">[날씨 Api를 넣어주세요]</v-toolbar-title>
     </v-app-bar>
-    <v-main :style="{ 'background-color': '#B1D0E0' }" :key="componentKey">
-      <div class="ma-5">
+    <v-main :style="{ 'background-color': '#B1D0E0' }">
+      <div class="ma-5" :key="componentKey">
         <v-row>
           <v-col>
             <h2
@@ -229,9 +235,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <h2>
-                  🎶노래재생중<br />ヾ(≧▽≦*)o <v-btn elevation="3">🔊</v-btn>
-                </h2>
+                <h2>🎶노래재생중<br />ヾ(≧▽≦*)o</h2>
                 <v-select
                   v-model="select_data"
                   v-on:change="url_change"
@@ -243,7 +247,7 @@
                 ></v-select>
               </v-col>
               <v-col>
-                <iframe 
+                <iframe
                   width="215px"
                   height="120px"
                   :src="this.now_playing_url"
@@ -323,6 +327,7 @@ export default {
             "https://www.youtube.com/embed/Dx5qFachd3A?controls=0&autoplay=1",
         },
       ],
+      time: "",
     };
   },
   methods: {
@@ -383,40 +388,44 @@ export default {
     }
 
     async function weather() {
-      const opemwather = await axios(
-        "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" +
-          process.env.VUE_APP_token
-      );
-      const data = opemwather.data;
-      const image = data.weather[0].icon;
-      console.log(data.weather[0].icon);
-      let icon = "";
+      if (localStorage.getItem("weatherapi") != undefined || localStorage.getItem("weatherapi") != null) {
+        const opemwather = await axios(
+          "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" +
+          localStorage.getItem("weatherapi")
+        );
 
-      if (image == "01d" || image == "01n") {
-        icon = "🌕";
-      } else if (image == "02d" || image == "02n") {
-        icon = "⛅";
-      } else if (image == "03d" || image == "03n") {
-        icon = "🌫️";
-      } else if (image == "04d" || image == "04n") {
-        icon = "☁";
-      } else if (image == "09d" || image == "09n") {
-        icon = "🌧";
-      } else if (image == "10d" || image == "10n") {
-        icon = "🌦";
-      } else if (image == "11d" || image == "11n") {
-        icon = "🌩";
-      } else if (image == "13d" || image == "13n") {
-        icon = "❄";
-      } else if (image == "50d" || image == "50n") {
-        icon = "🌫️";
+        const data = opemwather.data;
+        const image = data.weather[0].icon;
+        let icon = "";
+
+        if (image == "01d" || image == "01n") {
+          icon = "🌕";
+        } else if (image == "02d" || image == "02n") {
+          icon = "⛅";
+        } else if (image == "03d" || image == "03n") {
+          icon = "🌫️";
+        } else if (image == "04d" || image == "04n") {
+          icon = "☁";
+        } else if (image == "09d" || image == "09n") {
+          icon = "🌧";
+        } else if (image == "10d" || image == "10n") {
+          icon = "🌦";
+        } else if (image == "11d" || image == "11n") {
+          icon = "🌩";
+        } else if (image == "13d" || image == "13n") {
+          icon = "❄";
+        } else if (image == "50d" || image == "50n") {
+          icon = "🌫️";
+        }
+
+        return {
+          temp: (data.main.temp - 273.15).toFixed(2),
+          info: data.weather[0].main,
+          icon: icon,
+        };
+      }else{
+        return undefined
       }
-
-      return {
-        temp: (data.main.temp - 273.15).toFixed(2),
-        info: data.weather[0].main,
-        icon: icon,
-      };
     }
 
     //처음에 한번만 이벤트가 발생하는곳
@@ -485,12 +494,8 @@ export default {
     setInterval(async () => {
       //componentKey키는 0에서 1로 왔다갔다
       //키값만 바꾸어서 재렌딩을 시킨다.
-      if (this.componentKey == 0) {
-        this.componentKey = 0;
-      } else {
-        this.componentKey = 1;
-      }
-    }, 6000);
+      this.time = dayjs().format("YYYY.M.Dㅤ/ㅤHH:mm:ss");
+    }, 1000);
   },
 };
 </script>
