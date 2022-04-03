@@ -9,13 +9,19 @@
         {{ this.time }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title v-if="this.input.weather != undefined" :style="{ 'font-weight': 'Bold' }">
+      <v-toolbar-title
+        v-if="this.input.weather != undefined"
+        :style="{ 'font-weight': 'Bold' }"
+      >
         부산: {{ this.input.weather["temp"] }}℃ 날씨:
         {{ this.input.weather["info"] }}
         <span :style="{ 'font-size': '30px' }">{{
           this.input.weather["icon"]
-        }}</span></v-toolbar-title>
-        <v-toolbar-title v-else :style="{ 'font-weight': 'Bold' }">[날씨 Api를 넣어주세요]</v-toolbar-title>
+        }}</span></v-toolbar-title
+      >
+      <v-toolbar-title v-else :style="{ 'font-weight': 'Bold' }"
+        >[날씨 Api를 넣어주세요]</v-toolbar-title
+      >
     </v-app-bar>
     <v-main :style="{ 'background-color': '#B1D0E0' }">
       <div class="ma-5" :key="componentKey">
@@ -348,17 +354,39 @@ export default {
     //이 fun은 기숙사를 파싱해서 저장하는 함수이다.
     async function getfood(typei, data) {
       const time = dayjs().format("YYYY-MM-DD");
+      //행복기숙사용
       if (typei == "happy") {
-        for (let index = 0; index < 7; index++) {
-          if (data["happy"][index].Date == time) {
-            return data["happy"][index];
+        try {
+          for (let index = 0; index < 7; index++) {
+            if (data["happy"][index].Date == time) {
+              return data["happy"][index];
+            }
           }
+        } catch (error) {
+          return {
+            breakfast: "없거나 Api서버 오류 발생",
+            lunch: "없거나 Api서버 오류 발생",
+            lunch_s: "없거나 Api서버 오류 발생",
+            dinner: "없거나 Api서버 오류 발생",
+            dinner_s: "없거나 Api서버 오류 발생",
+          };
         }
+        //효민기숙사용
       } else if (typei == "hyomin") {
-        for (let index = 0; index < 7; index++) {
-          if (data["hyomin"][index].Date == time) {
-            return data["hyomin"][index];
+        try {
+          for (let index = 0; index < 7; index++) {
+            if (data["hyomin"][index].Date == time) {
+              return data["hyomin"][index];
+            }
           }
+        } catch (error) {
+          return {
+            breakfast: "없거나 Api서버 오류 발생",
+            lunch: "없거나 Api서버 오류 발생",
+            lunch_s: "없거나 Api서버 오류 발생",
+            dinner: "없거나 Api서버 오류 발생",
+            dinner_s: "없거나 Api서버 오류 발생",
+          };
         }
       } else if (typei == "inforamtion") {
         try {
@@ -388,10 +416,13 @@ export default {
     }
 
     async function weather() {
-      if (localStorage.getItem("weatherapi") != undefined || localStorage.getItem("weatherapi") != null) {
+      if (
+        localStorage.getItem("weatherapi") != undefined ||
+        localStorage.getItem("weatherapi") != null
+      ) {
         const opemwather = await axios(
           "https://api.openweathermap.org/data/2.5/weather?q=Busan&appid=" +
-          localStorage.getItem("weatherapi")
+            localStorage.getItem("weatherapi")
         );
 
         const data = opemwather.data;
@@ -423,8 +454,8 @@ export default {
           info: data.weather[0].main,
           icon: icon,
         };
-      }else{
-        return undefined
+      } else {
+        return undefined;
       }
     }
 

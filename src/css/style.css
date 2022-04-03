@@ -3,6 +3,11 @@
   src: url('../assets//font//tte.ttf');
 }
 
+ion-slides {
+  height: 100%;
+}
+
+
 .t {
    -ms-overflow-style: none;
    font-family: D2;
