@@ -1,5 +1,5 @@
 <template>
-  <v-app class="mmain t">
+  <v-app class="mmain t" v-if="this.black == 0">
     <v-app-bar app :style="{ 'background-color': '#A1CAE2' }">
       <v-toolbar-title :style="{ 'font-weight': 'Bold' }">
         ASW D.o.D Dap Dashboard</v-toolbar-title
@@ -275,6 +275,7 @@
     </v-footer>
     n>
   </v-app>
+  <v-app :style="{ 'background-color': 'black' }" v-else></v-app>
 </template>
 
 <script>
@@ -306,7 +307,7 @@ export default {
       //신경쓸 필요가 없다.
       //키값 0~3까지 쓴다.
       componentKey: 0,
-
+      black: 0,
       //유투브 음악틀때 필로한 초기 데이터들이다.
       select_data: "",
       now_playing: localStorage.getItem("n_title"),
@@ -470,7 +471,7 @@ export default {
     this.input.hyomin = await getfood("hyomin", response.data);
     this.input.inforamtion = await getfood("inforamtion", response.data);
     this.input.suduck = await getfood("suduck", response.data);
-    console.log(this.input.inforamtion);
+
     //추가 사항(차차형이 부탁한 노래^^)
     if (localStorage.getItem("n_title") != undefined) {
       this.now_playing = localStorage.getItem("n_title");
@@ -508,6 +509,12 @@ export default {
       this.input.school = json1["학교공지"];
     }
 
+    if (dayjs().format("HH") < 9) {
+      this.black = 1;
+    } else {
+      this.black = 0;
+    }
+
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     //8시간마다 새로고침을 한다.
     setInterval(async () => {
@@ -520,6 +527,14 @@ export default {
     setInterval(async () => {
       this.input.weather = await weather();
     }, 3600000);
+
+    setInterval(async () => {
+      if (dayjs().format("HH") < 9) {
+        this.black = 1;
+      } else {
+        this.black = 0;
+      }
+    }, 1800000);
 
     //10분마다 새로고침을 한다. (Fake)
     setInterval(async () => {
