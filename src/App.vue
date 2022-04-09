@@ -510,12 +510,14 @@ export default {
       this.input.school = json1["학교공지"];
     }
 
-    if (dayjs().format("HH") < 9) {
-      this.black = 1;
-    } else {
-      this.black = 0;
-    }
-
+    setInterval(async () => {
+      if (dayjs().format("HH") < 9) {
+        this.black = 1;
+      } else {
+        this.black = 0;
+      }
+    }, 1800000);
+    
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     //8시간마다 새로고침을 한다.
     setInterval(async () => {
