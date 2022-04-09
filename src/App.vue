@@ -359,7 +359,7 @@ export default {
       //행복기숙사용
       if (typei == "happy") {
         try {
-          for (let index = 0; index < 7; index++) {
+          for (let index = 0; index < data["happy"].length; index++) {
             if (data["happy"][index].Date == time) {
               return data["happy"][index];
             }
@@ -376,7 +376,7 @@ export default {
         //효민기숙사용
       } else if (typei == "hyomin") {
         try {
-          for (let index = 0; index < 8; index++) {
+          for (let index = 0; index < data["hyomin"].length; index++) {
             if (data["hyomin"][index].Date == time) {
               return data["hyomin"][index];
             }
@@ -511,7 +511,7 @@ export default {
     }
 
     if (dayjs().format("HH") < 9) {
-      this.black = 0;
+      this.black = 1;
     } else {
       this.black = 0;
     }
