@@ -1,3 +1,6 @@
+<img src="https://user-images.githubusercontent.com/87979171/162585315-d1c019b0-4f25-4c06-87cc-3a2c004730ce.png" width="auto" height="300">
+데시보드 사진
+
 # 🤔What is Repo?
 이 레포는 동아리에 있을때 동아리원들이 학교 소식을 한번에 보기위해서 만들었습니다!
 
