@@ -269,7 +269,7 @@
       </div>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
-      Made by INMD1 (maybe)전역일:2023-11-06 
+      Made by INMD1 (maybe)전역일:2023-11-06
       <v-spacer></v-spacer>
       Update: {{ this.input.Uptime }}
     </v-footer>
@@ -281,7 +281,7 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
-import 'dayjs/locale/ko';
+import "dayjs/locale/ko";
 
 export default {
   name: "App",
@@ -376,7 +376,7 @@ export default {
         //효민기숙사용
       } else if (typei == "hyomin") {
         try {
-          for (let index = 0; index < 7; index++) {
+          for (let index = 0; index < 8; index++) {
             if (data["hyomin"][index].Date == time) {
               return data["hyomin"][index];
             }
@@ -511,7 +511,7 @@ export default {
     }
 
     if (dayjs().format("HH") < 9) {
-      this.black = 1;
+      this.black = 0;
     } else {
       this.black = 0;
     }
@@ -539,8 +539,10 @@ export default {
 
     //10분마다 새로고침을 한다. (Fake)
     setInterval(async () => {
-      dayjs.locale('ko')
-      this.time = dayjs().add(30, 'minute').format("dddd YYYY.MM.DD / A HH:mm:ss")
+      dayjs.locale("ko");
+      this.time = dayjs()
+        .add(30, "minute")
+        .format("dddd YYYY.MM.DD / A HH:mm:ss");
     }, 1000);
   },
 };
