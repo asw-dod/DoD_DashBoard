@@ -7,7 +7,7 @@
 # 🤔앞으로 업데이트는?
 만든이가 군대를 가기 때문에 군대가기 전까지는 업데이트를 계속 할 에정입니다.
 
-## 만든이
-|----|
-|![image](https://user-images.githubusercontent.com/87979171/162585096-70d66225-252e-4ebd-a2b8-2745282ab878.png)
-|INMD1|
+|만든이|
+|-----|
+|<img src="https://user-images.githubusercontent.com/87979171/162585096-70d66225-252e-4ebd-a2b8-2745282ab878.png" width="100" height="100">
+|[INMD1](https://github.com/INMD1)|
