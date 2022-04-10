@@ -1,4 +1,4 @@
-# 💻데시보드 사진
+# 💻대시보드 사진
 <img src="https://user-images.githubusercontent.com/87979171/162585315-d1c019b0-4f25-4c06-87cc-3a2c004730ce.png" width="auto" height="300">
 
 # 🤔What is Repo?
