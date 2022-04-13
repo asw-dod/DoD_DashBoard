@@ -275,7 +275,7 @@
     </v-footer>
     n>
   </v-app>
-  <v-app :style="{ 'background-color': 'black' }" v-else></v-app>
+  <v-app :style="{ 'background-color': 'black', 'cursor': 'none' }" v-else></v-app>
 </template>
 
 <script>
@@ -515,14 +515,6 @@ export default {
       } else {
         this.black = 0;
       }
-      
-    setInterval(async () => {
-      if (dayjs().format("HH") < 9) {
-        this.black = 1;
-      } else {
-        this.black = 0;
-      }
-    }, 1800000);
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     //8시간마다 새로고침을 한다.
@@ -541,7 +533,7 @@ export default {
       if (dayjs().format("HH") < 9) {
         this.black = 1;
       } else {
-        this.black = 0;
+        this.black = 0;         
       }
     }, 1800000);
 
