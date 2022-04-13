@@ -7,11 +7,10 @@ ion-slides {
   height: 100%;
 }
 
-
 .t {
    -ms-overflow-style: none;
    font-family: D2;
-
+    position: fixed;
  }
 
  ::-webkit-scrollbar {

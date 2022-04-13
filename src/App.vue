@@ -511,7 +511,7 @@ export default {
     }
 
       if (dayjs().format("HH") < 9) {
-        this.black = 1;
+        this.black = 0;
       } else {
         this.black = 0;
       }
