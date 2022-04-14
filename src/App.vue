@@ -511,13 +511,12 @@ export default {
     }
 
       if (dayjs().format("HH") < 9) {
-        this.black = 0;
+        this.black = 1;
       } else {
         this.black = 0;
       }
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
-    //8시간마다 새로고침을 한다.
     setInterval(async () => {
       //서버단에서 변경사항이 없는지 업데이트를한다.
       //만약에 변경사항이 없으면 그냥뭐 api에서
