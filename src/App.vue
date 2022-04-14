@@ -541,7 +541,6 @@ export default {
     setInterval(async () => {
       dayjs.locale("ko");
       this.time = dayjs()
-        .add(30, "minute")
         .format("dddd YYYY.MM.DD / A HH:mm:ss");
     }, 1000);
   },
