@@ -269,7 +269,7 @@
       </div>
     </v-main>
     <v-main v-else-if="this.game == 1">
-      <iframe src="https://www.trex-game.skipser.com/" frameborder="0" v-if="this.gmaemenu == 0"></iframe>
+      <iframe class="Diframe" src="https://www.trex-game.skipser.com/" frameborder="0" v-if="this.gmaemenu == 0"></iframe>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
       Made by INMD1 (maybe)전역일:2023-11-06
