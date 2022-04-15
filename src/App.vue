@@ -1,7 +1,7 @@
 <template>
   <v-app class="mmain t" v-if="this.black == 0">
     <v-app-bar app :style="{ 'background-color': '#A1CAE2' }">
-      <v-toolbar-title :style="{ 'font-weight': 'Bold' }">
+      <v-toolbar-title @click="gamestart" :style="{ 'font-weight': 'Bold' }">
         ASW D.o.D Dap Dashboard</v-toolbar-title
       >
       <v-spacer></v-spacer>
@@ -23,7 +23,7 @@
         >[날씨 Api를 넣어주세요]</v-toolbar-title
       >
     </v-app-bar>
-    <v-main :style="{ 'background-color': '#B1D0E0' }">
+    <v-main v-if="this.game == 0" :style="{ 'background-color': '#B1D0E0' }">
       <div class="ma-5" :key="componentKey">
         <v-row>
           <v-col>
@@ -268,6 +268,9 @@
         </v-row>
       </div>
     </v-main>
+    <v-main v-else-if="this.game == 1">
+      <iframe src="https://www.trex-game.skipser.com/" frameborder="0" v-if="this.gmaemenu == 0"></iframe>
+    </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
       Made by INMD1 (maybe)전역일:2023-11-06
       <v-spacer></v-spacer>
@@ -275,7 +278,10 @@
     </v-footer>
     n>
   </v-app>
-  <v-app :style="{ 'background-color': 'black', 'cursor': 'none' }" v-else></v-app>
+  <v-app
+    :style="{ 'background-color': 'black', cursor: 'none' }"
+    v-else
+  ></v-app>
 </template>
 
 <script>
@@ -313,6 +319,9 @@ export default {
       select_data: "",
       now_playing: localStorage.getItem("n_title"),
       now_playing_url: localStorage.getItem("n_url"),
+      //이스터에그
+      game: 0,
+      gmaemenu : 0,
       items: [
         {
           title: "잔잔한 lofi hip hop",
@@ -346,6 +355,15 @@ export default {
       this.now_playing = localStorage.getItem("n_title");
       this.now_playing_url = localStorage.getItem("n_url");
       console.log(this.select_data);
+    },
+
+    gamestart() {
+      if (this.game == 0) {
+        this.game = 1;
+      } else if (this.game == 1) {
+        this.game = 0;
+      }
+      console.log(this.game);
     },
   },
   async mounted() {
@@ -510,11 +528,11 @@ export default {
       this.input.school = json1["학교공지"];
     }
 
-      if (dayjs().format("HH") < 9) {
-        this.black = 1;
-      } else {
-        this.black = 0;
-      }
+    if (dayjs().format("HH") < 9) {
+      this.black = 0;
+    } else {
+      this.black = 0;
+    }
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     setInterval(async () => {
@@ -532,15 +550,14 @@ export default {
       if (dayjs().format("HH") < 9) {
         this.black = 1;
       } else {
-        this.black = 0;         
+        this.black = 0;
       }
     }, 1800000);
 
     //10분마다 새로고침을 한다. (Fake)
     setInterval(async () => {
       dayjs.locale("ko");
-      this.time = dayjs()
-        .format("dddd YYYY.MM.DD / A HH:mm:ss");
+      this.time = dayjs().format("dddd YYYY.MM.DD / A HH:mm:ss");
     }, 1000);
   },
 };
