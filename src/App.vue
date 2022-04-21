@@ -223,17 +223,40 @@
                     <v-col>
                       <h2>효민기숙사</h2>
                       <h2>아침</h2>
-                      <p class="memu-size">
-                        {{ this.input.hyomin["breakfast"] }}
-                      </p>
+                      <div v-if="this.color == 1">
+                        <p class="memu-size" style="color: #E1B643;">
+                          {{ this.input.hyomin["breakfast"] }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p class="memu-size">
+                          {{ this.input.hyomin["breakfast"] }}
+                        </p>
+                      </div>
+                      
                       <h2>점심</h2>
-                      <p class="memu-size">
-                        {{ this.input.hyomin["lunch"] }}
-                      </p>
+                      <div v-if="this.color1 == 1">
+                        <p class="memu-size" style="color: #E1B643;">
+                          {{ this.input.hyomin["lunch"] }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p class="memu-size">
+                          {{ this.input.hyomin["lunch"] }}
+                        </p>
+                      </div>
+
                       <h2>저녁</h2>
-                      <p class="memu-size">
-                        {{ this.input.hyomin["dinner"] }}
-                      </p>
+                      <div v-if="this.color2 == 1">
+                        <p class="memu-size" style="color: #E1B643;">
+                          {{ this.input.hyomin["dinner"] }}
+                        </p>
+                      </div>
+                      <div v-else>
+                        <p class="memu-size">
+                          {{ this.input.hyomin["dinner"] }}
+                        </p>
+                      </div>
                     </v-col>
                   </v-carousel-item>
                 </v-carousel>
@@ -269,7 +292,12 @@
       </div>
     </v-main>
     <v-main v-else-if="this.game == 1">
-      <iframe class="Diframe" src="https://www.trex-game.skipser.com/" frameborder="0" v-if="this.gmaemenu == 0"></iframe>
+      <iframe
+        class="Diframe"
+        src="https://www.trex-game.skipser.com/"
+        frameborder="0"
+        v-if="this.gmaemenu == 0"
+      ></iframe>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
       Made by INMD1 (maybe)전역일:2023-11-06
@@ -321,7 +349,11 @@ export default {
       now_playing_url: localStorage.getItem("n_url"),
       //이스터에그
       game: 0,
-      gmaemenu : 0,
+      gmaemenu: 0,
+      //그외 추가하는거
+      color: 0,
+      color1: 0,
+      color2: 0,
       items: [
         {
           title: "잔잔한 lofi hip hop",
@@ -527,6 +559,17 @@ export default {
       this.input.academic = json1["학과공지"];
       this.input.school = json1["학교공지"];
     }
+
+    if (this.input.hyomin["breakfast"].includes("특식")) {
+      this.color = 1;
+    }
+    if (this.input.hyomin["lunch"].includes("특식")) {
+      this.color1 = 1;
+    }
+    if (this.input.hyomin["dinner"].includes("특식")) {
+      this.color2 = 1;
+    }
+    console.log(this.color);
 
     if (dayjs().format("HH") < 9) {
       this.black = 0;
