@@ -113,7 +113,7 @@
         </v-carousel>
       </v-col>
     </v-row>
-    <modal name="Calculator" :width="500" :height="400">
+    <modal name="Calculator" :width="500" :height="440">
       <v-container>
         <h2>1명 당 {{ this.result }}원 입니다.</h2>
         <p>{{ this.pricenum }} / {{ this.personnum }}</p>
@@ -153,7 +153,9 @@
           <v-col v-on:click="zero2">00</v-col>
           <v-col v-on:click="Reset_return">Reset</v-col>
         </v-row>
-        <p>*소수점으로는 변환이 안됨니다.</p>
+        <br>
+        <p>*소수점으로는 변환이 안됨니다. <br> 
+        *창를 닫을려면 창밖 아무곳이나 누루세요</p>
       </v-container>
     </modal>
   </div>
