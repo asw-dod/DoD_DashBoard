@@ -13,6 +13,7 @@
     "dayjs": "^1.11.0",
     "v-animate-css": "^0.0.5",
     "vue": "^2.6.14",
+    "vue-js-modal": "^2.0.1",
     "vue-router": "^3.4.9",
     "vuetify": "^2.6.0"
   },
@@ -42,7 +43,9 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/multi-word-component-names": "off"
+    }
   },
   "browserslist": [
     "> 1%",

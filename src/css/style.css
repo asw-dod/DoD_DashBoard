@@ -18,7 +18,7 @@ ion-slides {
  }
  
 .card-size {
-   height: 39.2vh;
+   height: 38vh;
    overflow: scroll;
 }
 
@@ -27,7 +27,7 @@ ion-slides {
 }
 
 .t-card-size {
-  height: 84vh;
+  height: 82vh;
   overflow: scroll;
 }
 

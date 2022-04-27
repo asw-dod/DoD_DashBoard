@@ -147,121 +147,7 @@
             </v-row>
           </v-col>
           <v-col>
-            <v-row>
-              <v-col>
-                <h2>📌오늘 학식공지</h2>
-                <v-carousel
-                  cycle
-                  height="300"
-                  :show-arrows="false"
-                  hide-delimiter-background
-                  delimiter-icon="mdi-minus"
-                  class="h_card"
-                  :style="{ 'background-color': '#F6F2D4' }"
-                >
-                  <v-carousel-item>
-                    <v-col>
-                      <h2>수덕전(공통: 김밥 라면)</h2>
-                      <h2>수덕전 코너1</h2>
-                      <p class="memu-size">정식</p>
-                      <h2>수덕전 코너2</h2>
-                      <p class="memu-size">
-                        {{ this.input.suduck["cor2"] }}<br />
-                      </p>
-                      <h2>수덕전 코너3</h2>
-                      <p class="memu-size">
-                        {{ this.input.suduck["cor3"] }}<br />
-                      </p>
-                    </v-col>
-                  </v-carousel-item>
-                  <v-carousel-item>
-                    <v-col>
-                      <h2>정보공학관(공통: 라면)</h2>
-                      <h2>정보공학관 코너1</h2>
-                      <p class="memu-size">
-                        {{ this.input.inforamtion["cor1"] }}<br />
-                      </p>
-                      <h2>정보공학관 코너3</h2>
-                      <p class="memu-size">
-                        {{ this.input.inforamtion["cor3"] }}<br />
-                      </p>
-                    </v-col>
-                  </v-carousel-item>
-                </v-carousel>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col class="s_card">
-                <h2>📌오늘 기숙사 식단 공지</h2>
-                <v-carousel
-                  cycle
-                  height="400"
-                  :show-arrows="false"
-                  hide-delimiter-background
-                  delimiter-icon="mdi-minus"
-                  class="h_card"
-                  :style="{ 'background-color': '#F6F2D4' }"
-                >
-                  <v-carousel-item>
-                    <v-col>
-                      <h2>행복기숙사</h2>
-                      <h2>점심</h2>
-                      <p class="memu-size">
-                        [한식] {{ this.input.happy["lunch"] }}<br />[일품]{{
-                          this.input.happy["lunch_s"]
-                        }}
-                      </p>
-                      <h2>저녁</h2>
-                      <p class="memu-size">
-                        [한식] {{ this.input.happy["dinner"] }}<br />[일품]{{
-                          this.input.happy["dinner_s"]
-                        }}
-                      </p>
-                    </v-col>
-                  </v-carousel-item>
-                  <v-carousel-item>
-                    <v-col>
-                      <h2>효민기숙사</h2>
-                      <h2>아침</h2>
-                      <div v-if="this.color == 1">
-                        <p class="memu-size" style="color: #E1B643;">
-                          {{ this.input.hyomin["breakfast"] }}
-                        </p>
-                      </div>
-                      <div v-else>
-                        <p class="memu-size">
-                          {{ this.input.hyomin["breakfast"] }}
-                        </p>
-                      </div>
-                      
-                      <h2>점심</h2>
-                      <div v-if="this.color1 == 1">
-                        <p class="memu-size" style="color: #E1B643;">
-                          {{ this.input.hyomin["lunch"] }}
-                        </p>
-                      </div>
-                      <div v-else>
-                        <p class="memu-size">
-                          {{ this.input.hyomin["lunch"] }}
-                        </p>
-                      </div>
-
-                      <h2>저녁</h2>
-                      <div v-if="this.color2 == 1">
-                        <p class="memu-size" style="color: #E1B643;">
-                          {{ this.input.hyomin["dinner"] }}
-                        </p>
-                      </div>
-                      <div v-else>
-                        <p class="memu-size">
-                          {{ this.input.hyomin["dinner"] }}
-                        </p>
-                      </div>
-                    </v-col>
-                  </v-carousel-item>
-                </v-carousel>
-              </v-col>
-            </v-row>
+            <foodviews/>
             <v-row>
               <v-col>
                 <h2>🎶노래재생중<br />ヾ(≧▽≦*)o</h2>
@@ -316,16 +202,17 @@
 import dayjs from "dayjs";
 import axios from "axios";
 import "dayjs/locale/ko";
-
+import foodviews from "./View/foodviews.vue"
 export default {
   name: "App",
-  components: {},
+  components: {
+    foodviews
+  },
   data: function () {
     //처음 데이터 세팅
     return {
       input: {
         Uptime: "",
-        hyomin: "",
         happy: "",
         weather: "불러오는 중...",
         job_announcement: [],
@@ -335,8 +222,6 @@ export default {
         Entrepreneurship: [],
         academic: [],
         school: [],
-        inforamtion: [],
-        suduck: [],
       },
       //이 값은 Fake이기 때문에 따로
       //신경쓸 필요가 없다.
@@ -350,10 +235,6 @@ export default {
       //이스터에그
       game: 0,
       gmaemenu: 0,
-      //그외 추가하는거
-      color: 0,
-      color1: 0,
-      color2: 0,
       items: [
         {
           title: "잔잔한 lofi hip hop",
@@ -402,70 +283,7 @@ export default {
     //변수를 적는 곳
     let response = "";
 
-    //fun을 적는곳(반복을 위해서 fun을 섰다.)
-    //이 fun은 기숙사를 파싱해서 저장하는 함수이다.
-    async function getfood(typei, data) {
-      const time = dayjs().format("YYYY-MM-DD");
-      //행복기숙사용
-      if (typei == "happy") {
-        try {
-          for (let index = 0; index < data["happy"].length; index++) {
-            if (data["happy"][index].Date == time) {
-              return data["happy"][index];
-            }
-          }
-        } catch (error) {
-          return {
-            breakfast: "없거나 Api서버 오류 발생",
-            lunch: "없거나 Api서버 오류 발생",
-            lunch_s: "없거나 Api서버 오류 발생",
-            dinner: "없거나 Api서버 오류 발생",
-            dinner_s: "없거나 Api서버 오류 발생",
-          };
-        }
-        //효민기숙사용
-      } else if (typei == "hyomin") {
-        try {
-          for (let index = 0; index < data["hyomin"].length; index++) {
-            if (data["hyomin"][index].Date == time) {
-              return data["hyomin"][index];
-            }
-          }
-        } catch (error) {
-          return {
-            breakfast: "없거나 Api서버 오류 발생",
-            lunch: "없거나 Api서버 오류 발생",
-            lunch_s: "없거나 Api서버 오류 발생",
-            dinner: "없거나 Api서버 오류 발생",
-            dinner_s: "없거나 Api서버 오류 발생",
-          };
-        }
-      } else if (typei == "inforamtion") {
-        try {
-          return {
-            cor1: data["inforamtion"]["정보공학관 코너1"][0]["menuName"],
-            cor3: data["inforamtion"]["정보공학관 코너3"][0]["menuName"],
-          };
-        } catch (error) {
-          return {
-            cor1: "없습",
-            cor3: "없습",
-          };
-        }
-      } else if (typei == "suduck") {
-        try {
-          return {
-            cor2: data["suduck"]["수덕전 코너2"][0]["menuName"],
-            cor3: data["suduck"]["수덕전 코너3"][0]["menuName"],
-          };
-        } catch (error) {
-          return {
-            cor2: "없습",
-            cor3: "없습",
-          };
-        }
-      }
-    }
+
 
     async function weather() {
       if (
@@ -511,17 +329,9 @@ export default {
       }
     }
 
-    //처음에 한번만 이벤트가 발생하는곳
-    response = await axios(
-      "https://raw.githubusercontent.com/asw-dod/Deu_food_api/master/output/api.json"
-    );
 
     this.input.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
     this.input.weather = await weather();
-    this.input.happy = await getfood("happy", response.data);
-    this.input.hyomin = await getfood("hyomin", response.data);
-    this.input.inforamtion = await getfood("inforamtion", response.data);
-    this.input.suduck = await getfood("suduck", response.data);
 
     //추가 사항(차차형이 부탁한 노래^^)
     if (localStorage.getItem("n_title") != undefined) {

@@ -14,3 +14,8 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+import VModal from 'vue-js-modal/dist/index.nocss.js'
+import 'vue-js-modal/dist/styles.css'
+ 
+Vue.use(VModal)
