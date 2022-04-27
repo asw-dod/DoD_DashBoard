@@ -191,8 +191,10 @@ export default {
   methods: {
     openModal() {
       this.$modal.show("Calculator");
+      this.num_signal = 0;
       this.pricenum = "";
       this.personnum = "";
+      this.result = 0;
     },
     price() {
       this.num_signal = 0;
