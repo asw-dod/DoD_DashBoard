@@ -394,16 +394,6 @@ export default {
       this.input.school = json1["학교공지"];
     }
 
-    if (this.input.hyomin["breakfast"].includes("특식")) {
-      this.color = 1;
-    }
-    if (this.input.hyomin["lunch"].includes("특식")) {
-      this.color1 = 1;
-    }
-    if (this.input.hyomin["dinner"].includes("특식")) {
-      this.color2 = 1;
-    }
-    console.log(this.color);
 
     if (dayjs().format("HH") < 9) {
       this.black = 0;
@@ -431,10 +421,10 @@ export default {
       }
     }, 1800000);
 
-    //10분마다 새로고침을 한다. (Fake)
     setInterval(async () => {
       dayjs.locale("ko");
       this.time = dayjs().format("dddd YYYY.MM.DD / A HH:mm:ss");
+      console.log(this.time);
     }, 1000);
   },
 };
