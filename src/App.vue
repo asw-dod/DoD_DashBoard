@@ -194,7 +194,7 @@
             </v-btn>
 
             <v-btn value="right" v-on:click="fourgame">
-              <span class="hidden-sm-and-down">사목게임</span>
+              <span class="hidden-sm-and-down">지렁이 게임</span>
             </v-btn>
           </v-btn-toggle>
         </v-col>
