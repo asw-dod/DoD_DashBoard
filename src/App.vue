@@ -192,6 +192,10 @@
             <v-btn value="right" v-on:click="threegame">
               <span class="hidden-sm-and-down">사목게임</span>
             </v-btn>
+
+            <v-btn value="right" v-on:click="fourgame">
+              <span class="hidden-sm-and-down">사목게임</span>
+            </v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>
@@ -289,6 +293,9 @@ export default {
     },
     threegame() {
       this.gmaemenu = "https://c4arena.com/";
+    },
+    fourgame(){
+      this.gmaemenu = "https://slither.io/";
     },
     gamestart() {
       if (this.game == 0) {
