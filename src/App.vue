@@ -147,7 +147,7 @@
             </v-row>
           </v-col>
           <v-col>
-            <foodviews/>
+            <foodviews />
             <v-row>
               <v-col>
                 <h2>🎶노래재생중<br />ヾ(≧▽≦*)o</h2>
@@ -178,12 +178,24 @@
       </div>
     </v-main>
     <v-main v-else-if="this.game == 1">
-      <iframe
-        class="Diframe"
-        src="https://www.trex-game.skipser.com/"
-        frameborder="0"
-        v-if="this.gmaemenu == 0"
-      ></iframe>
+      <v-row :style="{ 'background-color': '#A1CAE2' }">
+        <v-col>
+          <v-btn-toggle v-model="icon" borderless>
+            <v-btn value="left" v-on:click="onegame">
+              <span class="hidden-sm-and-down">공룡게임</span>
+            </v-btn>
+
+            <v-btn value="center" v-on:click="twogame">
+              <span class="hidden-sm-and-down">바둑(온라인)</span>
+            </v-btn>
+
+            <v-btn value="right" v-on:click="threegame">
+              <span class="hidden-sm-and-down">사목게임</span>
+            </v-btn>
+          </v-btn-toggle>
+        </v-col>
+      </v-row>
+      <iframe class="Diframe" :src="this.gmaemenu" frameborder="0"></iframe>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
       Made by INMD1 (maybe)전역일:2023-11-06
@@ -202,11 +214,11 @@
 import dayjs from "dayjs";
 import axios from "axios";
 import "dayjs/locale/ko";
-import foodviews from "./View/foodviews.vue"
+import foodviews from "./View/foodviews.vue";
 export default {
   name: "App",
   components: {
-    foodviews
+    foodviews,
   },
   data: function () {
     //처음 데이터 세팅
@@ -234,7 +246,7 @@ export default {
       now_playing_url: localStorage.getItem("n_url"),
       //이스터에그
       game: 0,
-      gmaemenu: 0,
+      gmaemenu: "https://www.trex-game.skipser.com/",
       items: [
         {
           title: "잔잔한 lofi hip hop",
@@ -269,7 +281,15 @@ export default {
       this.now_playing_url = localStorage.getItem("n_url");
       console.log(this.select_data);
     },
-
+    onegame() {
+      this.gmaemenu = "https://www.trex-game.skipser.com/";
+    },
+    twogame() {
+      this.gmaemenu = "https://www.playok.com/";
+    },
+    threegame() {
+      this.gmaemenu = "https://c4arena.com/";
+    },
     gamestart() {
       if (this.game == 0) {
         this.game = 1;
@@ -282,8 +302,6 @@ export default {
   async mounted() {
     //변수를 적는 곳
     let response = "";
-
-
 
     async function weather() {
       if (
@@ -328,7 +346,6 @@ export default {
         return undefined;
       }
     }
-
 
     this.input.Uptime = dayjs().format("YYYY년 MM월 DD일 HH시mm분 ss초");
     this.input.weather = await weather();
