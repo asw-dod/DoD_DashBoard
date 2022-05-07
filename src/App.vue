@@ -295,7 +295,7 @@ export default {
       this.gmaemenu = "https://c4arena.com/";
     },
     fourgame(){
-      this.gmaemenu = "https://slither.io/";
+      this.gmaemenu = "https://playtictactoe.org/";
     },
     gamestart() {
       if (this.game == 0) {
@@ -396,10 +396,11 @@ export default {
 
 
     if (dayjs().format("HH") < 9) {
-      this.black = 0;
+      this.black = 1;
     } else {
       this.black = 0;
     }
+
 
     //몇시간 마다 반복하는 이벤트가 발생하는 곳
     setInterval(async () => {
