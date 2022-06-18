@@ -281,15 +281,22 @@ export default {
         }
       } else if (typei == "suduck") {
         try {
+          let temp1 = "";let temp2 = "";
+          if(data["suduck"]["수덕전 코너1"][0]["menuName"] != undefined){                 temp1 = data["suduck"]["수덕전 코너1"][0]["menuName"],
+            temp2 = data["suduck"]["수덕전 코너2"][0]["menuName"]
+          }else if(data["suduck"]["수덕전 코너2"][0]["menuName"] != undefined){
+            temp1 = data["suduck"]["수덕전 코너2"][0]["menuName"],
+            temp2 = data["suduck"]["수덕전 코너3"][0]["menuName"]
+         }
+           return {
+             cor1: temp1,
+             cor2: temp2
+            };
+        }catch(error){
           return {
-            cor2: data["suduck"]["수덕전 코너2"][0]["menuName"],
-            cor3: data["suduck"]["수덕전 코너3"][0]["menuName"],
-          };
-        } catch (error) {
-          return {
+            cor1: "없습",
             cor2: "없습",
-            cor3: "없습",
-          };
+          }
         }
       }
     }
