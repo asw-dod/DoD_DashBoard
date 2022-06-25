@@ -280,6 +280,9 @@ export default {
           };
         }
       } else if (typei == "suduck") {
+        try {
+          let temp1 = "없습", temp2 = "없습";
+           //set data["suduck"]["수덕전 코너1"][0]["menuName"] 
           if(data["suduck"]["수덕전 코너2"] == undefined){
             temp2 = data["suduck"]["수덕전 코너3"][0]["menuName"]
           }else if(data["suduck"]["수덕전 코너3"] == undefined){
@@ -296,7 +299,8 @@ export default {
             cor3: "Error!",
           }
         }
-      }
+
+      }          
     }
     //처음에 한번만 이벤트가 발생하는곳
     response = await axios(
