@@ -295,8 +295,8 @@ export default {
         }catch(error){
           console.log(error)
           return {
-            cor2: "Error!",
-            cor3: "Error!",
+            cor2: "주말 휴무",
+            cor3: "주말 휴무",
           }
         }
 
