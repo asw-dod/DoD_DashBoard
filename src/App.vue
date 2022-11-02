@@ -202,7 +202,7 @@
       <iframe class="Diframe" :src="this.gmaemenu" frameborder="0"></iframe>
     </v-main>
     <v-footer app :style="{ 'background-color': '#B6C9F0' }">
-      Made by INMD1 (maybe)전역일:2023-11-06
+      Made by INMD1 (maybe)전역일:2023-11-09
       <v-spacer></v-spacer>
       Update: {{ this.input.Uptime }}
     </v-footer>
