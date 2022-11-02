@@ -255,22 +255,12 @@ export default {
         {
           title: "잔잔한 lofi hip hop",
           value:
-            "https://www.youtube.com/embed/5qap5aO4i9A?controls=0&autoplay=1",
-        },
-        {
-          title: "약간의 EDM",
-          value:
-            "https://www.youtube.com/embed/N65Jb683pXQ?controls=0&autoplay=1",
-        },
-        {
-          title: "k-pop/krnb radio",
-          value:
-            "https://www.youtube.com/embed/RFHj_vjVxqM?controls=0&autoplay=1",
+            "https://www.youtube.com/embed/jfKfPfyJRdk?controls=0&autoplay=1",
         },
         {
           title: "옛날 카페느낌",
           value:
-            "https://www.youtube.com/embed/Dx5qFachd3A?controls=0&autoplay=1",
+            "https://www.youtube.com/embed/GblcqdvejCM?controls=0&autoplay=1",
         },
       ],
       time: "",
@@ -364,7 +354,7 @@ export default {
     } else {
       this.now_playing = "잔잔한 lofi hip hop";
       this.now_playing_url =
-        "https://www.youtube.com/embed/5qap5aO4i9A?controls=0&autoplay=1";
+        "https://www.youtube.com/embed/jfKfPfyJRdk?controls=0&autoplay=1";
     }
 
     //학교 공지를 파싱해온다.

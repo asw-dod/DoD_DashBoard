@@ -8,6 +8,7 @@
         <v-carousel
           cycle
           height="300"
+          :interval="8000"
           :show-arrows="false"
           hide-delimiter-background
           delimiter-icon="mdi-minus"
@@ -48,6 +49,7 @@
           cycle
           height="38vh"
           :show-arrows="false"
+          :interval="8000"
           hide-delimiter-background
           delimiter-icon="mdi-minus"
           class="h_card"
