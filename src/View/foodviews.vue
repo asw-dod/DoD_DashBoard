@@ -285,9 +285,9 @@ export default {
         try {
           let temp1 = "없습", temp2 = "없습";
            //set data["suduck"]["수덕전 코너1"][0]["menuName"] 
-          if(data["suduck"]["수덕전 코너2"] == undefined){
-            temp2 = data["suduck"]["수덕전 코너3"][0]["menuName"]
-          }else if(data["suduck"]["수덕전 코너3"] == undefined){
+          if(data["suduck"]["수덕전 코너2"] != undefined){
+            temp2 = data["suduck"]["수덕전 코너3"][0]["menuName"];
+          }else if(data["suduck"]["수덕전 코너3"] != undefined){
             temp2 = data["suduck"]["수덕전 코너2"][0]["menuName"];
           }
            return {
