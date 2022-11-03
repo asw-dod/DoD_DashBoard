@@ -185,17 +185,11 @@
               <span class="hidden-sm-and-down">공룡게임</span>
             </v-btn>
 
-            <v-btn value="center" v-on:click="twogame">
-              <span class="hidden-sm-and-down">바둑(온라인)</span>
-            </v-btn>
 
             <v-btn value="right" v-on:click="threegame">
               <span class="hidden-sm-and-down">사목게임</span>
             </v-btn>
 
-            <v-btn value="right" v-on:click="fourgame">
-              <span class="hidden-sm-and-down">지렁이 게임</span>
-            </v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>
@@ -278,14 +272,8 @@ export default {
     onegame() {
       this.gmaemenu = "https://www.trex-game.skipser.com/";
     },
-    twogame() {
-      this.gmaemenu = "https://www.playok.com/";
-    },
     threegame() {
       this.gmaemenu = "https://c4arena.com/";
-    },
-    fourgame(){
-      this.gmaemenu = "https://playtictactoe.org/";
     },
     gamestart() {
       if (this.game == 0) {
